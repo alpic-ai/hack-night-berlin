@@ -3,7 +3,7 @@ import "@/index.css";
 import { useLayout } from "skybridge/web";
 import { Avatar, AvatarFallback, AvatarImage } from "@alpic-ai/ui/components/avatar";
 import { Card, CardContent } from "@alpic-ai/ui/components/card";
-import { Linkedin } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 import { Shell } from "./components/shell.js";
 
@@ -70,7 +70,7 @@ export default function MeetTheHosts() {
                     <p className="type-text-sm text-muted-foreground">{h.role}</p>
                     <p className="type-text-xs text-primary">{h.company}</p>
                   </div>
-                  <Linkedin className="text-muted-foreground group-hover:text-primary size-4 transition-colors" />
+                  <ExternalLink className="text-muted-foreground group-hover:text-primary size-4 transition-colors" />
                 </CardContent>
               </Card>
             </a>

@@ -31,7 +31,7 @@ type SubmitOutput = {
 export default function SubmitProject() {
   const { theme } = useLayout();
   const info = useToolInfo<{ input: SubmitInput; output: SubmitOutput }>();
-  const callTool = useCallTool<SubmitInput, SubmitOutput>("submit_project");
+  const { callToolAsync } = useCallTool<SubmitInput>("submit_project");
 
   const prefill = info.input ?? {};
   const [team, setTeam] = useState(prefill.team_name ?? "");
@@ -56,7 +56,7 @@ export default function SubmitProject() {
     if (!canSubmit) return;
     setPending(true);
     try {
-      await callTool.call({
+      await callToolAsync({
         team_name: team,
         emails,
         repo_url: repo,
