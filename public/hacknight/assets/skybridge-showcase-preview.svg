@@ -1,0 +1,44 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="750" rx="28" fill="#071215"/>
+  <path d="M0 0H1200V750H0V0Z" fill="url(#grid)"/>
+  <rect x="44" y="26" width="1112" height="58" rx="16" fill="#0D191C" stroke="#173036"/>
+  <rect x="64" y="38" width="194" height="34" rx="6" fill="#FFFFFF"/>
+  <text x="94" y="61" fill="#111A1D" font-family="Arial, sans-serif" font-size="18" font-weight="700">SKYBRIDGE</text>
+  <text x="484" y="62" fill="#C8D2D5" font-family="Arial, sans-serif" font-size="18">SHOWCASE</text>
+  <text x="204" y="154" fill="#EFF5F5" font-family="Arial, sans-serif" font-size="54" font-weight="300">Built with</text>
+  <text x="472" y="154" fill="#7EE8EE" font-family="Arial, sans-serif" font-size="54" font-weight="700">Skybridge.</text>
+  <text x="228" y="202" fill="#A8B6BA" font-family="Arial, sans-serif" font-size="24">Real MCP Apps shipping in ChatGPT and Claude.</text>
+  <g>
+    <rect x="40" y="280" width="344" height="378" rx="24" fill="#0E191C" stroke="#1E353B"/>
+    <rect x="58" y="296" width="308" height="180" rx="18" fill="#FFFFFF"/>
+    <circle cx="86" cy="314" r="8" fill="#E56B5D"/>
+    <rect x="118" y="314" width="130" height="14" rx="7" fill="#E8ECEE"/>
+    <rect x="156" y="362" width="168" height="40" rx="18" fill="#F3F4F6"/>
+    <rect x="130" y="448" width="166" height="20" rx="10" fill="#27AB67"/>
+    <text x="62" y="564" fill="#D5E0E2" font-family="Arial, sans-serif" font-size="14">CLAUDE</text>
+    <text x="62" y="596" fill="#F0F6F6" font-family="Arial, sans-serif" font-size="28" font-weight="700">Kiwi.com</text>
+  </g>
+  <g>
+    <rect x="428" y="280" width="344" height="378" rx="24" fill="#0E191C" stroke="#1E353B"/>
+    <rect x="446" y="296" width="308" height="180" rx="18" fill="#FFFFFF"/>
+    <circle cx="476" cy="314" r="10" fill="#0B0F10"/>
+    <rect x="574" y="360" width="168" height="50" rx="18" fill="#F3F4F6"/>
+    <rect x="556" y="434" width="164" height="30" rx="10" fill="#EEF1F4"/>
+    <text x="450" y="564" fill="#80D400" font-family="Arial, sans-serif" font-size="14">CHATGPT</text>
+    <text x="450" y="596" fill="#F0F6F6" font-family="Arial, sans-serif" font-size="28" font-weight="700">Cottages.com</text>
+  </g>
+  <g>
+    <rect x="816" y="280" width="344" height="378" rx="24" fill="#0E191C" stroke="#1E353B"/>
+    <rect x="834" y="296" width="308" height="180" rx="18" fill="#FFFFFF"/>
+    <circle cx="864" cy="314" r="10" fill="#0B0F10"/>
+    <rect x="952" y="362" width="150" height="44" rx="18" fill="#F3F4F6"/>
+    <rect x="920" y="432" width="182" height="32" rx="10" fill="#EEF1F4"/>
+    <text x="838" y="564" fill="#31CFA0" font-family="Arial, sans-serif" font-size="14">CHATGPT</text>
+    <text x="838" y="596" fill="#F0F6F6" font-family="Arial, sans-serif" font-size="28" font-weight="700">Recommerce</text>
+  </g>
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(149, 176, 180, 0.12)" stroke-width="1"/>
+    </pattern>
+  </defs>
+</svg>
