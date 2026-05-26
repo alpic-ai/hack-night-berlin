@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Berlin Hack Night</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mozilla+Text:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero" id="top">
+        <img class="hero-mark" src="./assets/alpic-peak.svg" alt="Alpic ski goggles" />
+        <p class="brandline">ALPIC × HANDPICKED BERLIN</p>
+        <h1>Berlin <span>Hack Night</span></h1>
+        <p class="subtitle">'Build a GPT App' · May 28, 2026 · Berlin · 18:00-22:00</p>
+      </header>
+
+      <div class="wiki-layout">
+        <aside class="toc">
+          <div class="toc-box">
+            <p class="eyebrow">On this page</p>
+            <nav>
+              <a href="#overview">Overview</a>
+              <a href="#day-before">The day before</a>
+              <a href="#hack-night">At hack night</a>
+              <a href="#deadline">Before Sunday</a>
+              <a href="#support">Support & help</a>
+              <a href="#prizes">Prizes</a>
+              <a href="#faq">FAQ</a>
+              <a href="#opportunities">Alpic opportunities</a>
+            </nav>
+          </div>
+        </aside>
+
+        <article class="content">
+          <section id="overview" class="section">
+            <h2>Overview</h2>
+            <p>
+              This page is the working guide for Berlin Hack Night. The goal is to help
+              you arrive prepared, get moving quickly during the event, and keep the weekend
+              judging deadline in view while you build.
+            </p>
+            <p>
+              Want to try our Hack Night MCP Apps?
+              Go <a class="inline-link" href="https://hack-night-berlin-10425ef8.alpic.live/try" target="_blank" rel="noopener noreferrer">here</a>.
+            </p>
+          </section>
+
+          <section id="day-before" class="section">
+            <h2>The day before</h2>
+
+            <div class="guide-step">
+              <div class="step-marker">1</div>
+              <div class="step-body">
+                <h3>Install the local toolchain</h3>
+                <p>
+                  Make sure the whole local loop is already working on your machine before
+                  you arrive.
+                </p>
+                <ul class="checklist">
+                  <li>Install <a class="inline-link" href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer">Node.js 22+</a> and <a class="inline-link" href="https://git-scm.com/install/" target="_blank" rel="noopener noreferrer">Git</a>.</li>
+                  <li>Install the <a class="inline-link" href="https://developers.openai.com/codex/app" target="_blank" rel="noopener noreferrer">Codex app</a> or <a class="inline-link" href="https://developers.openai.com/codex/cli" target="_blank" rel="noopener noreferrer">Codex CLI</a>.</li>
+                  <li>Create a <a class="inline-link" href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub account</a>.</li>
+                  <li>Create an <a class="inline-link" href="https://app.alpic.ai/" target="_blank" rel="noopener noreferrer">Alpic account</a>.</li>
+                  <li>
+                    Ask Codex:
+                    <code>"what skills do you have? do you know the skybridge skill?"</code>
+                    It should list <code>skybridge</code> as an accessible skill.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="guide-step">
+              <div class="step-marker">2</div>
+              <div class="step-body">
+                <h3>Read the docs</h3>
+                <p>
+                  A short pass through the official material will save a lot of event time
+                  once the hack night starts.
+                </p>
+                <a
+                  class="video-block"
+                  href="https://www.youtube.com/watch?v=9X8GRGcl5oA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p class="video-caption">
+                    You can start with the 9-minute intro: 
+                    <span class="inline-link">watch on YouTube</span>
+                  </p>
+                  <div class="video-frame video-poster">
+                    <img
+                      src="https://img.youtube.com/vi/9X8GRGcl5oA/maxresdefault.jpg"
+                      alt="Skybridge intro video thumbnail"
+                    />
+                    <div class="video-overlay">
+                      <span class="video-pill">9-minute intro</span>
+                      <span class="video-play">Watch on YouTube</span>
+                    </div>
+                  </div>
+                </a>
+                <p class="subhead">Explore Skybridge documentation and examples</p>
+                <ul class="link-list doc-cards">
+                  <li>
+                    <a href="https://docs.skybridge.tech/home" target="_blank" rel="noopener noreferrer">
+                      <img
+                        class="doc-card-preview"
+                        src="./assets/skybridge-docs-preview.svg"
+                        alt="Skybridge Quickstart preview"
+                      />
+                      <span class="doc-card-kicker">Documentation</span>
+                      <strong class="doc-card-title">Skybridge Docs</strong>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://docs.skybridge.tech/examples" target="_blank" rel="noopener noreferrer">
+                      <img
+                        class="doc-card-preview"
+                        src="./assets/skybridge-examples-preview.svg"
+                        alt="Skybridge examples preview"
+                      />
+                      <span class="doc-card-kicker">Reference builds</span>
+                      <strong class="doc-card-title">Examples with code</strong>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://www.skybridge.tech/showcase" target="_blank" rel="noopener noreferrer">
+                      <img
+                        class="doc-card-preview"
+                        src="./assets/skybridge-showcase-preview.svg"
+                        alt="Skybridge showcase preview"
+                      />
+                      <span class="doc-card-kicker">Inspiration</span>
+                      <strong class="doc-card-title">Apps Showcase</strong>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="guide-step">
+              <div class="step-marker">3</div>
+              <div class="step-body">
+                <h3>Join our Discord</h3>
+                <p>
+                  Join <a class="inline-link" href="https://discord.com/invite/gFYTXbv8tv" target="_blank" rel="noopener noreferrer">the Alpic Discord</a> for questions, updates, and support.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="hack-night" class="section">
+            <h2>At hack night</h2>
+            <p>
+              The room is for momentum. Once your local setup is ready, the shortest path is
+              to scaffold, run devtools, iterate with Codex, deploy, then test through the tunnel.
+            </p>
+            <div class="hack-night-flow" aria-label="Hack night flow">
+              <article class="flow-step">
+                <div class="flow-marker">1</div>
+                <div class="flow-body">
+                  <h3>Confirm your local setup</h3>
+                  <p>If you skipped the prep, finish the local toolchain first so you do not lose room time on installs.</p>
+                </div>
+              </article>
+              <article class="flow-step">
+                <div class="flow-marker">2</div>
+                <div class="flow-body">
+                  <h3>Create the starter app</h3>
+                  <p>Scaffold the Skybridge app with the Skill installed globally so you start from the right structure.</p>
+                  <div class="command-row">
+                    <code class="flow-command">npm create skybridge@latest my-app</code>
+                    <button class="copy-command" type="button" onclick="navigator.clipboard.writeText('npm create skybridge@latest my-app')">Copy</button>
+                  </div>
+                </div>
+              </article>
+              <article class="flow-step">
+                <div class="flow-marker">3</div>
+                <div class="flow-body">
+                  <h3>Redeem your Codex credits</h3>
+                  <p>Activate your event credits before you begin the build so Codex is ready when you need it.</p>
+                </div>
+              </article>
+              <article class="flow-step">
+                <div class="flow-marker">4</div>
+                <div class="flow-body">
+                  <h3>Start the dev environment</h3>
+                  <p>Launch the local devtools and keep that window open while you iterate.</p>
+                  <div class="command-row">
+                    <code class="flow-command">npm run dev</code>
+                    <button class="copy-command" type="button" onclick="navigator.clipboard.writeText('npm run dev')">Copy</button>
+                  </div>
+                </div>
+              </article>
+              <article class="flow-step">
+                <div class="flow-marker">5</div>
+                <div class="flow-body">
+                  <h3>Build with Codex</h3>
+                  <p>Use Codex together with the Skybridge Skill to shape your flow, tools, and UI as you go.</p>
+                </div>
+              </article>
+              <article class="flow-step">
+                <div class="flow-marker">6</div>
+                <div class="flow-body">
+                  <h3>Deploy when the core loop works</h3>
+                  <p>Once the app behaves the way you want locally, push it to production.</p>
+                  <div class="command-row">
+                    <code class="flow-command">npm run deploy</code>
+                    <button class="copy-command" type="button" onclick="navigator.clipboard.writeText('npm run deploy')">Copy</button>
+                  </div>
+                  <p class="flow-links">
+                    <a class="inline-link" href="https://docs.skybridge.tech/quickstart/deploy" target="_blank" rel="noopener noreferrer">Full deploy docs</a>
+                  </p>
+                </div>
+              </article>
+              <article class="flow-step">
+                <div class="flow-marker">7</div>
+                <div class="flow-body">
+                  <h3>Test inside ChatGPT</h3>
+                  <p>Activate the tunnel, connect the app, and verify the full experience in ChatGPT before submission.</p>
+                  <p class="flow-links">
+                    <a class="inline-link" href="https://docs.skybridge.tech/quickstart/test-your-app#testing-in-chatgpt" target="_blank" rel="noopener noreferrer">Testing in ChatGPT</a>
+                  </p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section id="deadline" class="section">
+            <h2>Before Sunday, May 31</h2>
+            <div class="callout">
+              <p>
+                You have until <strong>23:59 on Sunday, May 31</strong> to refine your build
+                before final submission. That gives teams a full weekend to polish the demo
+                before asynchronous judging begins.
+              </p>
+            </div>
+          </section>
+
+          <section id="support" class="section">
+            <h2>Support & help</h2>
+            <p>
+              The Alpic team will be available on the hackathon premises to help with any
+              issue involving Skybridge and Alpic Cloud. We are easy to identify because we
+              wear pink ski goggles. You can also use the <a class="inline-link" href="https://discord.com/channels/1144547040454508606/1415779704702763169" target="_blank" rel="noopener noreferrer">Alpic Mentors channel in the Mistral Discord</a>, join the <a class="inline-link" href="https://discord.gg/gFYTXbv8tv" target="_blank" rel="noopener noreferrer">Alpic Discord</a>, check the <a class="inline-link" href="https://docs.alpic.ai/" target="_blank" rel="noopener noreferrer">Alpic Docs</a>, or open the <a class="inline-link" href="https://mcp-install-instructions.alpic.cloud/" target="_blank" rel="noopener noreferrer">Install Instructions Generator</a>.
+            </p>
+          </section>
+
+          <section id="prizes" class="section">
+            <h2>Prizes</h2>
+            <p>
+              Winners are selected during an asynchronous judging round, which gives teams
+              the weekend to refine their work before final submission.
+            </p>
+            <div class="podium" aria-label="Prize podium">
+              <article class="podium-rank podium-rank-second">
+                <div class="podium-top">
+                  <span class="podium-medal">2</span>
+                  <div>
+                    <p class="podium-label">2nd place</p>
+                    <h3>Runner-up</h3>
+                  </div>
+                </div>
+                <ul>
+                  <li>1,000 Alpic credits</li>
+                  <li>EUR 250 build fund</li>
+                  <li>Goodie bag</li>
+                </ul>
+                <div class="podium-base">2</div>
+              </article>
+              <article class="podium-rank podium-rank-first">
+                <div class="podium-top">
+                  <span class="podium-medal">1</span>
+                  <div>
+                    <p class="podium-label">1st place</p>
+                    <h3>Grand prize</h3>
+                  </div>
+                </div>
+                <ul>
+                  <li>1,500 Alpic credits</li>
+                  <li>EUR 500 build fund</li>
+                  <li>1 hour Alpic CTO coaching session</li>
+                  <li>Alpic Showcase featured</li>
+                  <li>Goodie bag</li>
+                </ul>
+                <div class="podium-base">1</div>
+              </article>
+              <article class="podium-rank podium-rank-third">
+                <div class="podium-top">
+                  <span class="podium-medal">3</span>
+                  <div>
+                    <p class="podium-label">3rd place</p>
+                    <h3>Finalist</h3>
+                  </div>
+                </div>
+                <ul>
+                  <li>500 Alpic credits</li>
+                  <li>EUR 100 build fund</li>
+                  <li>Goodie bag</li>
+                </ul>
+                <div class="podium-base">3</div>
+              </article>
+            </div>
+          </section>
+
+          <section id="faq" class="section">
+            <h2>FAQ</h2>
+            <div class="faq-list">
+              <div>
+                <h3>Do I need an Alpic credit card setup?</h3>
+                <p>No. Creating an Alpic account for the hack night does not require a credit card.</p>
+              </div>
+              <div>
+                <h3>How do I know the Skybridge Skill is installed?</h3>
+                <p>Ask Codex: "what skills do you have? do you know the skybridge skill?"</p>
+              </div>
+              <div>
+                <h3>When are winners selected?</h3>
+                <p>Winners are selected during an asynchronous judging round after final submissions close on Sunday, May 31 at 23:59.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="opportunities" class="section">
+            <h2>Alpic opportunities</h2>
+            <p>
+              We are always hiring exceptional candidates. Alpic is based in Paris.
+            </p>
+            <div class="button-row">
+              <a class="action action-primary" href="https://jobs.ashbyhq.com/Alpic?utm_source=fundedandhiring.com" target="_blank" rel="noopener noreferrer">
+                View open positions
+              </a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>
