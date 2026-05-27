@@ -1,15 +1,28 @@
 import "@/index.css";
 
 import { useState } from "react";
-import { useCallTool, useLayout, useToolInfo } from "skybridge/web";
+import { useCallTool, useLayout, useRequestClose, useToolInfo } from "skybridge/web";
 import { Button } from "@alpic-ai/ui/components/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@alpic-ai/ui/components/card";
 import { Input } from "@alpic-ai/ui/components/input";
 import { Label } from "@alpic-ai/ui/components/label";
 import { Textarea } from "@alpic-ai/ui/components/textarea";
-import { CheckCircle2, ExternalLink } from "lucide-react";
+import { CheckCircle2, ExternalLink, X } from "lucide-react";
 
 import { Shell } from "./components/shell.js";
+
+function CloseButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      aria-label="Close"
+      onClick={onClick}
+      className="absolute right-3 top-3 z-10 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+    >
+      <X className="size-4" />
+    </button>
+  );
+}
 
 const SUBMISSIONS_SHEET_URL =
   "https://docs.google.com/spreadsheets/d/1V-Ma6ZwWeRMkuhraRZu2iu6cq1n2uZcUEeaQAJg5Xi4/edit?usp=sharing";
@@ -32,6 +45,7 @@ export default function SubmitProject() {
   const { theme } = useLayout();
   const info = useToolInfo<{ input: SubmitInput; output: SubmitOutput }>();
   const { callToolAsync } = useCallTool<SubmitInput>("submit_project");
+  const requestClose = useRequestClose();
 
   const prefill = info.input ?? {};
   const [team, setTeam] = useState(prefill.team_name ?? "");
@@ -74,7 +88,8 @@ export default function SubmitProject() {
     return (
       <Shell theme={theme}>
         <div className="mx-auto flex max-w-md flex-col gap-6 px-6 py-12">
-          <Card>
+          <Card className="relative">
+            <CloseButton onClick={() => requestClose()} />
             <CardContent className="flex flex-col items-center gap-4 text-center">
               <CheckCircle2 className="text-primary size-12" />
               <h3 className="type-display-xs font-bold">Submission received</h3>
@@ -82,16 +97,6 @@ export default function SubmitProject() {
                 You're in. Submissions stay open until Sunday May 31 at 23:59 — you
                 can resubmit with edits any time before that.
               </p>
-              <Button asChild variant="secondary">
-                <a
-                  href={SUBMISSIONS_SHEET_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View all submissions
-                  <ExternalLink className="size-4" />
-                </a>
-              </Button>
             </CardContent>
           </Card>
         </div>
@@ -107,7 +112,8 @@ export default function SubmitProject() {
           <p className="type-text-sm text-muted-foreground">Save your progress</p>
         </header>
 
-        <Card>
+        <Card className="relative">
+          <CloseButton onClick={() => requestClose()} />
           <CardHeader>
             <CardTitle>Submission details</CardTitle>
           </CardHeader>

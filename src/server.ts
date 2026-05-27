@@ -257,15 +257,26 @@ const server = new McpServer(
           }).toString();
 
           let url: string | null = process.env.SUBMISSIONS_WEBHOOK_URL;
+          let cookies = "";
           for (let hops = 0; hops < 5 && url; hops++) {
+            const headers: Record<string, string> = {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "User-Agent":
+                "Mozilla/5.0 (compatible; BerlinHackNight/0.0.1; +https://hack-night-berlin-703abf80.alpic.live)",
+            };
+            if (cookies) headers["Cookie"] = cookies;
             const res: Response = await fetch(url, {
               method: "POST",
-              headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-              },
+              headers,
               body,
               redirect: "manual",
             });
+            // Accumulate cookies across the redirect chain
+            const setCookie = res.headers.getSetCookie?.() ?? [];
+            for (const sc of setCookie) {
+              const pair = sc.split(";")[0];
+              if (pair) cookies = cookies ? `${cookies}; ${pair}` : pair;
+            }
             if (res.status >= 300 && res.status < 400) {
               url = res.headers.get("location");
               continue;
