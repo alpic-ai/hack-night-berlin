@@ -13,6 +13,7 @@ This page itself is not an LLM experience. It lives alongside the Skybridge app 
 
 **Key interactions**:
 - open resource links
+- use the prominent MCP Apps CTA from the Overview section
 - review hacknight steps
 - inspect support, prizes, and FAQ
 
