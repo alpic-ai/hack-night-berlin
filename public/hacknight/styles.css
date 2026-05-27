@@ -108,6 +108,7 @@ a {
   margin: 0;
   font-size: clamp(1.35rem, 2.3vw, 2rem);
   color: var(--muted);
+  text-wrap: balance;
 }
 
 .wiki-layout {
@@ -278,6 +279,7 @@ a {
   padding-left: 18px;
   font-size: 1rem;
   line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
 .checklist li::before {
@@ -624,6 +626,8 @@ a {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.95rem;
   color: var(--text);
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .callout > code {
@@ -699,6 +703,7 @@ a {
   display: flex;
   align-items: stretch;
   width: fit-content;
+  max-width: 100%;
   margin-top: 12px;
   border-radius: 10px;
   background: rgba(21, 34, 38, 0.06);
@@ -706,15 +711,19 @@ a {
 }
 
 .flow-command {
+  min-width: 0;
   display: inline-flex;
   align-items: center;
   padding: 10px 14px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 0.96rem;
   color: var(--text);
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .copy-command {
+  flex: 0 0 auto;
   border: 0;
   border-left: 1px solid rgba(21, 34, 38, 0.1);
   padding: 0 12px;
@@ -911,6 +920,18 @@ a {
   .doc-cards {
     grid-template-columns: 1fr;
   }
+
+  .podium-rank-first {
+    order: 1;
+  }
+
+  .podium-rank-second {
+    order: 2;
+  }
+
+  .podium-rank-third {
+    order: 3;
+  }
 }
 
 @media (max-width: 640px) {
@@ -924,8 +945,30 @@ a {
     padding-bottom: 28px;
   }
 
+  .hero-mark {
+    width: 104px;
+  }
+
+  .hero h1 {
+    max-width: 9ch;
+    font-size: clamp(3.45rem, 16vw, 4.05rem);
+    line-height: 0.95;
+  }
+
+  .subtitle {
+    max-width: 18rem;
+    font-size: 1.16rem;
+    line-height: 1.35;
+  }
+
   .guide-step {
-    grid-template-columns: 1fr;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .guide-step:not(:last-child)::before {
+    left: 20px;
+    top: 42px;
   }
 
   .step-marker {
@@ -953,6 +996,10 @@ a {
   }
 
   .mcp-app-cta a {
+    width: 100%;
+  }
+
+  .command-row {
     width: 100%;
   }
 }
