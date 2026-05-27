@@ -243,19 +243,40 @@ const server = new McpServer(
 
       if (hasAll && process.env.SUBMISSIONS_WEBHOOK_URL) {
         try {
-          await fetch(process.env.SUBMISSIONS_WEBHOOK_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              team_name,
-              emails,
-              repo_url,
-              video_url,
-              mcp_url,
-              notes: notes ?? "",
-              submitted_at: new Date().toISOString(),
-            }),
-          });
+          // Apps Script Web App requires form-encoded POSTs and uses a 302
+          // redirect from script.google.com to script.googleusercontent.com.
+          // Node's fetch downgrades POST→GET on 302, so we follow manually.
+          const body = new URLSearchParams({
+            team_name: team_name!,
+            emails: emails!,
+            repo_url: repo_url!,
+            video_url: video_url!,
+            mcp_url: mcp_url!,
+            notes: notes ?? "",
+            submitted_at: new Date().toISOString(),
+          }).toString();
+
+          let url: string | null = process.env.SUBMISSIONS_WEBHOOK_URL;
+          for (let hops = 0; hops < 5 && url; hops++) {
+            const res: Response = await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body,
+              redirect: "manual",
+            });
+            if (res.status >= 300 && res.status < 400) {
+              url = res.headers.get("location");
+              continue;
+            }
+            if (!res.ok) {
+              console.error(
+                `Submission webhook returned ${res.status}: ${(await res.text()).slice(0, 200)}`,
+              );
+            }
+            break;
+          }
         } catch (err) {
           console.error("Failed to post submission to webhook:", err);
         }
