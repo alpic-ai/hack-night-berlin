@@ -3,9 +3,7 @@ import { Badge } from "@alpic-ai/ui/components/badge";
 import { Button } from "@alpic-ai/ui/components/button";
 import { Card, CardContent } from "@alpic-ai/ui/components/card";
 import { cn } from "@alpic-ai/ui/lib/cn";
-import { Timer, X } from "lucide-react";
-
-import { useViewClose } from "./shell.js";
+import { Timer } from "lucide-react";
 
 type Item = { id: string; label: string; emoji: string; tooltip: string };
 
@@ -129,8 +127,6 @@ function pickOrder(tier: Tier): Order {
 type TierResult = { tier: Tier; score: number; passed: boolean };
 
 export default function SpatiShowdown() {
-  const close = useViewClose();
-
   const [phase, setPhase] = useState<Phase>("idle");
   const [tier, setTier] = useState<Tier>(1);
   const [roundInTier, setRoundInTier] = useState(0);
@@ -233,22 +229,8 @@ export default function SpatiShowdown() {
   const totalScore = history.reduce((s, h) => s + h.score, 0) + (phase === "playing" || phase === "result" ? tierScore : 0);
   const totalMax = tierMax(1) + tierMax(2) + tierMax(3);
 
-  function CloseButton() {
-    return (
-      <button
-        type="button"
-        aria-label="Close game"
-        onClick={close}
-        className="absolute right-3 top-3 z-10 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-      >
-        <X className="size-4" />
-      </button>
-    );
-  }
-
   return (
-    <Card className="relative mx-auto max-w-2xl">
-      <CloseButton />
+    <Card className="mx-auto max-w-2xl">
       <CardContent className="flex flex-col gap-6">
         <div className="flex flex-col items-center gap-1">
           <h2 className="type-display-xs font-bold text-primary">Späti Showdown</h2>
@@ -275,9 +257,6 @@ export default function SpatiShowdown() {
               </span>
             </div>
             <div className="flex gap-2">
-              <Button variant="secondary" onClick={close}>
-                Exit
-              </Button>
               <Button variant="primary" onClick={startGame}>
                 Start
               </Button>
@@ -435,9 +414,6 @@ export default function SpatiShowdown() {
               </div>
 
               <div className="flex flex-wrap justify-center gap-2">
-                <Button variant="secondary" onClick={close}>
-                  Exit
-                </Button>
                 {!passed && (
                   <Button
                     variant="primary"
@@ -515,9 +491,6 @@ export default function SpatiShowdown() {
             </div>
 
             <div className="flex gap-2">
-              <Button variant="secondary" onClick={close}>
-                Exit
-              </Button>
               <Button variant="primary" onClick={startGame}>
                 Play again
               </Button>

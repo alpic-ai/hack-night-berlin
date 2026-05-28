@@ -56,7 +56,7 @@ export default function Welcome() {
 
   if (!started) {
     return (
-      <Shell theme={theme} mountains="none">
+      <Shell theme={theme} mountains="none" nextActions="none">
         <div
           className="relative min-h-[640px] cursor-pointer select-none outline-none overflow-hidden bg-zinc-950"
           onClick={() => setStarted(true)}
@@ -100,7 +100,7 @@ export default function Welcome() {
   }
 
   return (
-    <Shell theme={theme} mountains="none">
+    <Shell theme={theme} mountains="none" nextActions="none">
       <div className="relative overflow-hidden">
         <div className="relative z-10 mx-auto flex max-w-4xl flex-col gap-8 px-6 py-10">
           <header className="flex flex-col items-center gap-4 text-center">
