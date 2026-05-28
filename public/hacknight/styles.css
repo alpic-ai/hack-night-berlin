@@ -765,6 +765,13 @@ a {
   margin-top: 10px !important;
 }
 
+.flow-prompt-label {
+  margin-top: 12px !important;
+  font-size: 0.95rem !important;
+  font-weight: 700;
+  color: var(--text) !important;
+}
+
 .button-row {
   display: flex;
   flex-wrap: wrap;
