@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useSendFollowUpMessage } from "skybridge/web";
-import { Gamepad2, Rocket, Sparkles } from "lucide-react";
+import { Gamepad2, MapPin, Rocket, Sparkles } from "lucide-react";
 
 import { cn } from "@alpic-ai/ui/lib/cn";
 
@@ -11,6 +11,11 @@ const NEXT_ACTIONS = [
     icon: Gamepad2,
     title: "Distract me",
     prompt: "I'm bored, play a game",
+  },
+  {
+    icon: MapPin,
+    title: "Event info",
+    prompt: "What time does it start?",
   },
   {
     icon: Rocket,
@@ -31,7 +36,7 @@ function NextActions() {
       <p className="type-text-xs text-muted-foreground text-center uppercase tracking-[0.2em] mb-4">
         What next?
       </p>
-      <div className="grid gap-3 md:grid-cols-3 max-w-3xl mx-auto">
+      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto">
         {NEXT_ACTIONS.map((a) => {
           const Icon = a.icon;
           return (
