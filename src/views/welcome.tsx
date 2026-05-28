@@ -3,7 +3,7 @@ import "@/index.css";
 import { useState } from "react";
 import { useLayout, useSendFollowUpMessage } from "skybridge/web";
 import { Card, CardContent, CardHeader, CardTitle } from "@alpic-ai/ui/components/card";
-import { Gamepad2, MapPin, Sparkles } from "lucide-react";
+import { Gamepad2, Rocket, Sparkles } from "lucide-react";
 
 import alpicPeak from "./images/alpic-peak.svg";
 import { Chairlift } from "./components/chairlift.js";
@@ -31,10 +31,10 @@ const CAPABILITIES: Capability[] = [
     prompt: "I'm bored, play a game",
   },
   {
-    icon: <MapPin className="size-5" />,
-    title: "Event info",
-    body: <>Venue, schedule, prizes, hosts — ask in your own words.</>,
-    prompt: "What time does it start?",
+    icon: <Rocket className="size-5" />,
+    title: "Submit your project",
+    body: <>Open the submission form when you're ready to deliver your GPT App.</>,
+    prompt: "I want to submit my project",
   },
   {
     icon: <Sparkles className="size-5" />,

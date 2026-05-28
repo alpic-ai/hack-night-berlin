@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useSendFollowUpMessage } from "skybridge/web";
-import { Gamepad2, MapPin, Sparkles } from "lucide-react";
+import { Gamepad2, Rocket, Sparkles } from "lucide-react";
 
 import { cn } from "@alpic-ai/ui/lib/cn";
 
@@ -13,9 +13,9 @@ const NEXT_ACTIONS = [
     prompt: "I'm bored, play a game",
   },
   {
-    icon: MapPin,
-    title: "Event info",
-    prompt: "What time does it start?",
+    icon: Rocket,
+    title: "Submit your project",
+    prompt: "I want to submit my project",
   },
   {
     icon: Sparkles,
