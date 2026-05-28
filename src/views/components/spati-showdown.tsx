@@ -6,6 +6,8 @@ import { Card, CardContent } from "@alpic-ai/ui/components/card";
 import { cn } from "@alpic-ai/ui/lib/cn";
 import { Timer, X } from "lucide-react";
 
+import { safeRequestClose, useHostCanClose } from "./shell.js";
+
 type Item = { id: string; label: string; emoji: string; tooltip: string };
 
 const ITEMS: Item[] = [
@@ -129,6 +131,8 @@ type TierResult = { tier: Tier; score: number; passed: boolean };
 
 export default function SpatiShowdown() {
   const requestClose = useRequestClose();
+  const canClose = useHostCanClose();
+  const close = () => safeRequestClose(requestClose);
 
   const [phase, setPhase] = useState<Phase>("idle");
   const [tier, setTier] = useState<Tier>(1);
@@ -233,11 +237,12 @@ export default function SpatiShowdown() {
   const totalMax = tierMax(1) + tierMax(2) + tierMax(3);
 
   function CloseButton() {
+    if (!canClose) return null;
     return (
       <button
         type="button"
         aria-label="Close game"
-        onClick={() => requestClose()}
+        onClick={close}
         className="absolute right-3 top-3 z-10 inline-flex size-8 items-center justify-center rounded-md text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
       >
         <X className="size-4" />
@@ -274,9 +279,11 @@ export default function SpatiShowdown() {
               </span>
             </div>
             <div className="flex gap-2">
-              <Button variant="secondary" onClick={() => requestClose()}>
-                Exit
-              </Button>
+              {canClose && (
+                <Button variant="secondary" onClick={close}>
+                  Exit
+                </Button>
+              )}
               <Button variant="primary" onClick={startGame}>
                 Start
               </Button>
@@ -434,9 +441,11 @@ export default function SpatiShowdown() {
               </div>
 
               <div className="flex flex-wrap justify-center gap-2">
-                <Button variant="secondary" onClick={() => requestClose()}>
-                  Exit
-                </Button>
+                {canClose && (
+                  <Button variant="secondary" onClick={close}>
+                    Exit
+                  </Button>
+                )}
                 {!passed && (
                   <Button
                     variant="primary"
@@ -514,9 +523,11 @@ export default function SpatiShowdown() {
             </div>
 
             <div className="flex gap-2">
-              <Button variant="secondary" onClick={() => requestClose()}>
-                Exit
-              </Button>
+              {canClose && (
+                <Button variant="secondary" onClick={close}>
+                  Exit
+                </Button>
+              )}
               <Button variant="primary" onClick={startGame}>
                 Play again
               </Button>

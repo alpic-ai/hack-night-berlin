@@ -9,9 +9,11 @@ import { Label } from "@alpic-ai/ui/components/label";
 import { Textarea } from "@alpic-ai/ui/components/textarea";
 import { CheckCircle2, ExternalLink, X } from "lucide-react";
 
-import { Shell } from "./components/shell.js";
+import { Shell, safeRequestClose, useHostCanClose } from "./components/shell.js";
 
 function CloseButton({ onClick }: { onClick: () => void }) {
+  const canClose = useHostCanClose();
+  if (!canClose) return null;
   return (
     <button
       type="button"
@@ -89,7 +91,7 @@ export default function SubmitProject() {
       <Shell theme={theme}>
         <div className="mx-auto flex max-w-md flex-col gap-6 px-6 py-12">
           <Card className="relative">
-            <CloseButton onClick={() => requestClose()} />
+            <CloseButton onClick={() => safeRequestClose(requestClose)} />
             <CardContent className="flex flex-col items-center gap-4 text-center">
               <CheckCircle2 className="text-primary size-12" />
               <h3 className="type-display-xs font-bold">Submission received</h3>
@@ -113,7 +115,7 @@ export default function SubmitProject() {
         </header>
 
         <Card className="relative">
-          <CloseButton onClick={() => requestClose()} />
+          <CloseButton onClick={() => safeRequestClose(requestClose)} />
           <CardHeader>
             <CardTitle>Submission details</CardTitle>
           </CardHeader>

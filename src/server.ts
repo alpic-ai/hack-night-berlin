@@ -261,7 +261,14 @@ const server = new McpServer(
             submitted_at: new Date().toISOString(),
           });
           const url = `${process.env.SUBMISSIONS_WEBHOOK_URL}?${params.toString()}`;
-          const res = await fetch(url, { method: "GET" });
+          const res = await fetch(url, {
+            method: "GET",
+            headers: {
+              "User-Agent":
+                "Mozilla/5.0 (compatible; BerlinHackNight/1.0; +https://hack-night-berlin-10425ef8.alpic.live)",
+              Accept: "application/json,text/html,*/*",
+            },
+          });
           if (res.ok) {
             const body = await res.text();
             try {
