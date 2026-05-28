@@ -241,12 +241,13 @@ const server = new McpServer(
         Boolean(video_url) &&
         Boolean(mcp_url);
 
+      let webhookOk = true;
       if (hasAll && process.env.SUBMISSIONS_WEBHOOK_URL) {
+        webhookOk = false;
         try {
-          // Apps Script Web App requires form-encoded POSTs and uses a 302
-          // redirect from script.google.com to script.googleusercontent.com.
-          // Node's fetch downgrades POST→GET on 302, so we follow manually.
-          const body = new URLSearchParams({
+          // GET with query params — sidesteps Apps Script's POST→302→re-POST
+          // chain which Node's fetch can't get past (405 from redirect target).
+          const params = new URLSearchParams({
             team_name: team_name!,
             emails: emails!,
             repo_url: repo_url!,
@@ -254,59 +255,57 @@ const server = new McpServer(
             mcp_url: mcp_url!,
             notes: notes ?? "",
             submitted_at: new Date().toISOString(),
-          }).toString();
-
-          let url: string | null = process.env.SUBMISSIONS_WEBHOOK_URL;
-          let cookies = "";
-          for (let hops = 0; hops < 5 && url; hops++) {
-            const headers: Record<string, string> = {
-              "Content-Type": "application/x-www-form-urlencoded",
-              "User-Agent":
-                "Mozilla/5.0 (compatible; BerlinHackNight/0.0.1; +https://hack-night-berlin-703abf80.alpic.live)",
-            };
-            if (cookies) headers["Cookie"] = cookies;
-            const res: Response = await fetch(url, {
-              method: "POST",
-              headers,
-              body,
-              redirect: "manual",
-            });
-            // Accumulate cookies across the redirect chain
-            const setCookie = res.headers.getSetCookie?.() ?? [];
-            for (const sc of setCookie) {
-              const pair = sc.split(";")[0];
-              if (pair) cookies = cookies ? `${cookies}; ${pair}` : pair;
+          });
+          const url = `${process.env.SUBMISSIONS_WEBHOOK_URL}?${params.toString()}`;
+          const res = await fetch(url, { method: "GET" });
+          if (res.ok) {
+            const body = await res.text();
+            try {
+              const parsed = JSON.parse(body);
+              webhookOk = parsed.ok === true;
+              if (!webhookOk) {
+                console.error(`Submission webhook responded but not ok: ${body.slice(0, 200)}`);
+              }
+            } catch {
+              console.error(`Submission webhook returned non-JSON body: ${body.slice(0, 200)}`);
             }
-            if (res.status >= 300 && res.status < 400) {
-              url = res.headers.get("location");
-              continue;
-            }
-            if (!res.ok) {
-              console.error(
-                `Submission webhook returned ${res.status}: ${(await res.text()).slice(0, 200)}`,
-              );
-            }
-            break;
+          } else {
+            console.error(
+              `Submission webhook returned ${res.status}: ${(await res.text()).slice(0, 200)}`,
+            );
           }
         } catch (err) {
-          console.error("Failed to post submission to webhook:", err);
+          console.error("Failed to call submission webhook:", err);
         }
+      }
+
+      const success = hasAll && webhookOk;
+
+      let message: string;
+      if (!hasAll) {
+        message = "Submission opened; awaiting fields.";
+      } else if (success) {
+        message = "Submission received.";
+      } else {
+        message = "Submission failed to save. Please retry or contact a host.";
       }
 
       return {
         structuredContent: {
-          ok: hasAll,
-          message: hasAll ? "Submission received." : "Submission opened; awaiting fields.",
+          ok: success,
+          message,
         },
         content: [
           {
             type: "text",
-            text: hasAll
-              ? `Submission received from ${team_name}. Confirm briefly in one sentence.`
-              : "Submission form opened. Tell the user briefly in one sentence to fill it in.",
+            text: !hasAll
+              ? "Submission form opened. Tell the user briefly in one sentence to fill it in."
+              : success
+                ? `Submission received from ${team_name}. Confirm briefly in one sentence.`
+                : `Submission attempt from ${team_name} failed to reach the sheet. Apologize briefly and tell the user to retry or grab a host.`,
           },
         ],
-        isError: false,
+        isError: !hasAll ? false : !success,
       };
     },
   );
