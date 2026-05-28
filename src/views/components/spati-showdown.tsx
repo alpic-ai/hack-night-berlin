@@ -435,11 +435,9 @@ export default function SpatiShowdown() {
               </div>
 
               <div className="flex flex-wrap justify-center gap-2">
-                {canClose && (
-                  <Button variant="secondary" onClick={close}>
-                    Exit
-                  </Button>
-                )}
+                <Button variant="secondary" onClick={close}>
+                  Exit
+                </Button>
                 {!passed && (
                   <Button
                     variant="primary"
