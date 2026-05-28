@@ -183,19 +183,30 @@
               <article class="flow-step">
                 <div class="flow-marker">2</div>
                 <div class="flow-body">
-                  <h3>Create the starter app</h3>
-                  <p>Scaffold the Skybridge app with the Skill installed globally so you start from the right structure.</p>
-                  <div class="command-row">
-                    <code class="flow-command">npm create skybridge@latest my-app</code>
-                    <button class="copy-command" type="button" onclick="navigator.clipboard.writeText('npm create skybridge@latest my-app')">Copy</button>
-                  </div>
+                  <h3>Redeem your Codex credits</h3>
+                  <ol class="credit-steps">
+                    <li>Install <a class="inline-link" href="https://developers.openai.com/codex/app" target="_blank" rel="noopener noreferrer">Codex</a>.</li>
+                    <li>
+                      Join our <a class="inline-link" href="https://discord.com/invite/pR2e6PCDC5" target="_blank" rel="noopener noreferrer">Discord</a>,
+                      and ask for a promo code by sending a DM to
+                      <code>@_eldodi</code>, <code>@harijoe</code>, or <code>@neil_ac</code>.
+                    </li>
+                    <li>
+                      Go to <a class="inline-link" href="https://chatgpt.com/p/YOURPROMOCODE" target="_blank" rel="noopener noreferrer">chatgpt.com/p/YOURPROMOCODE</a>
+                      and accept the credits. You should receive 2500 Codex API credits.
+                    </li>
+                  </ol>
                 </div>
               </article>
               <article class="flow-step">
                 <div class="flow-marker">3</div>
                 <div class="flow-body">
-                  <h3>Redeem your Codex credits</h3>
-                  <p>You will receive your Codex credit code at the beginning of hack night. Redeem it before you start building so Codex is ready when you need it.</p>
+                  <h3>Create the starter app</h3>
+                  <p>Scaffold the Skybridge app with the Skill installed globally so you start from the right structure.</p>
+                  <div class="command-row">
+                    <code class="flow-command">npm create skybridge@latest my-app</code>
+                    <button class="copy-command" type="button" onpointerdown="this.textContent = 'Copied'; this.classList.add('is-copied')" onclick="this.textContent = 'Copied'; this.classList.add('is-copied'); navigator.clipboard?.writeText?.('npm create skybridge@latest my-app'); setTimeout(() => { this.textContent = 'Copy'; this.classList.remove('is-copied'); }, 1800)">Copy</button>
+                  </div>
                 </div>
               </article>
               <article class="flow-step">
@@ -205,7 +216,7 @@
                   <p>Run the dev command to open Skybridge DevTools on localhost, then keep that window open while you iterate.</p>
                   <div class="command-row">
                     <code class="flow-command">npm run dev</code>
-                    <button class="copy-command" type="button" onclick="navigator.clipboard.writeText('npm run dev')">Copy</button>
+                    <button class="copy-command" type="button" onpointerdown="this.textContent = 'Copied'; this.classList.add('is-copied')" onclick="this.textContent = 'Copied'; this.classList.add('is-copied'); navigator.clipboard?.writeText?.('npm run dev'); setTimeout(() => { this.textContent = 'Copy'; this.classList.remove('is-copied'); }, 1800)">Copy</button>
                   </div>
                 </div>
               </article>
@@ -223,7 +234,7 @@
                   <p>Once the app behaves the way you want locally in Skybridge DevTools, push it to production with Alpic Cloud.</p>
                   <div class="command-row">
                     <code class="flow-command">npm run deploy</code>
-                    <button class="copy-command" type="button" onclick="navigator.clipboard.writeText('npm run deploy')">Copy</button>
+                    <button class="copy-command" type="button" onpointerdown="this.textContent = 'Copied'; this.classList.add('is-copied')" onclick="this.textContent = 'Copied'; this.classList.add('is-copied'); navigator.clipboard?.writeText?.('npm run deploy'); setTimeout(() => { this.textContent = 'Copy'; this.classList.remove('is-copied'); }, 1800)">Copy</button>
                   </div>
                   <p class="flow-links">
                     <a class="inline-link" href="https://docs.skybridge.tech/quickstart/deploy" target="_blank" rel="noopener noreferrer">Full deploy docs</a>
