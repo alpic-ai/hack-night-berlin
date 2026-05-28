@@ -1,38 +1,34 @@
-import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
+import { useRequestClose, useSendFollowUpMessage } from "skybridge/web";
 
 import { cn } from "@alpic-ai/ui/lib/cn";
 
 import { Mountains } from "./mountains.js";
 
 /**
- * True only when the MCP host actually implements requestClose. ChatGPT's
- * Apps SDK currently doesn't, and calling the hook throws. Use this to
- * gate the rendering of close buttons so they're never visible when broken.
+ * Universal "close this view" handler that works across hosts.
+ *
+ * 1. Try the host's native close (Alpic playground supports this).
+ * 2. If the host doesn't implement requestClose (e.g. ChatGPT's Apps SDK
+ *    currently doesn't, throws "window.openai.requestClose is not a
+ *    function"), fall back to sending a short follow-up message so the
+ *    user can move past the view in chat instead of being stuck.
+ * 3. Last resort: swallow silently rather than crash the view.
  */
-export function useHostCanClose(): boolean {
-  const [canClose, setCanClose] = useState(false);
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const w = window as Record<string, any>;
-    setCanClose(
-      typeof w.openai?.requestClose === "function" ||
-        typeof w.skybridge?.requestClose === "function",
-    );
-  }, []);
-  return canClose;
-}
-
-/**
- * Safe wrapper around the requestClose function returned by useRequestClose.
- * Swallows the host-not-supported error so a misfire never crashes the view.
- */
-export function safeRequestClose(requestClose: () => Promise<void> | void) {
-  try {
-    void requestClose();
-  } catch {
-    /* host doesn't implement close — silently ignore */
-  }
+export function useViewClose(): () => void {
+  const requestClose = useRequestClose();
+  const sendFollowUp = useSendFollowUpMessage();
+  return () => {
+    try {
+      void requestClose();
+    } catch {
+      try {
+        void sendFollowUp("Close this view, thanks.");
+      } catch {
+        /* host supports neither — give up */
+      }
+    }
+  };
 }
 
 export function Shell({

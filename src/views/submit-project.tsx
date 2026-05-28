@@ -1,7 +1,7 @@
 import "@/index.css";
 
 import { useState } from "react";
-import { useCallTool, useLayout, useRequestClose, useToolInfo } from "skybridge/web";
+import { useCallTool, useLayout, useToolInfo } from "skybridge/web";
 import { Button } from "@alpic-ai/ui/components/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@alpic-ai/ui/components/card";
 import { Input } from "@alpic-ai/ui/components/input";
@@ -9,11 +9,9 @@ import { Label } from "@alpic-ai/ui/components/label";
 import { Textarea } from "@alpic-ai/ui/components/textarea";
 import { CheckCircle2, ExternalLink, X } from "lucide-react";
 
-import { Shell, safeRequestClose, useHostCanClose } from "./components/shell.js";
+import { Shell, useViewClose } from "./components/shell.js";
 
 function CloseButton({ onClick }: { onClick: () => void }) {
-  const canClose = useHostCanClose();
-  if (!canClose) return null;
   return (
     <button
       type="button"
@@ -47,7 +45,7 @@ export default function SubmitProject() {
   const { theme } = useLayout();
   const info = useToolInfo<{ input: SubmitInput; output: SubmitOutput }>();
   const { callToolAsync } = useCallTool<SubmitInput>("submit_project");
-  const requestClose = useRequestClose();
+  const close = useViewClose();
 
   const prefill = info.input ?? {};
   const [team, setTeam] = useState(prefill.team_name ?? "");
@@ -91,7 +89,7 @@ export default function SubmitProject() {
       <Shell theme={theme}>
         <div className="mx-auto flex max-w-md flex-col gap-6 px-6 py-12">
           <Card className="relative">
-            <CloseButton onClick={() => safeRequestClose(requestClose)} />
+            <CloseButton onClick={close} />
             <CardContent className="flex flex-col items-center gap-4 text-center">
               <CheckCircle2 className="text-primary size-12" />
               <h3 className="type-display-xs font-bold">Submission received</h3>
@@ -115,7 +113,7 @@ export default function SubmitProject() {
         </header>
 
         <Card className="relative">
-          <CloseButton onClick={() => safeRequestClose(requestClose)} />
+          <CloseButton onClick={close} />
           <CardHeader>
             <CardTitle>Submission details</CardTitle>
           </CardHeader>

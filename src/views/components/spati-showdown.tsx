@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { useRequestClose } from "skybridge/web";
 import { Badge } from "@alpic-ai/ui/components/badge";
 import { Button } from "@alpic-ai/ui/components/button";
 import { Card, CardContent } from "@alpic-ai/ui/components/card";
 import { cn } from "@alpic-ai/ui/lib/cn";
 import { Timer, X } from "lucide-react";
 
-import { safeRequestClose, useHostCanClose } from "./shell.js";
+import { useViewClose } from "./shell.js";
 
 type Item = { id: string; label: string; emoji: string; tooltip: string };
 
@@ -130,9 +129,7 @@ function pickOrder(tier: Tier): Order {
 type TierResult = { tier: Tier; score: number; passed: boolean };
 
 export default function SpatiShowdown() {
-  const requestClose = useRequestClose();
-  const canClose = useHostCanClose();
-  const close = () => safeRequestClose(requestClose);
+  const close = useViewClose();
 
   const [phase, setPhase] = useState<Phase>("idle");
   const [tier, setTier] = useState<Tier>(1);
@@ -237,7 +234,6 @@ export default function SpatiShowdown() {
   const totalMax = tierMax(1) + tierMax(2) + tierMax(3);
 
   function CloseButton() {
-    if (!canClose) return null;
     return (
       <button
         type="button"
@@ -279,11 +275,9 @@ export default function SpatiShowdown() {
               </span>
             </div>
             <div className="flex gap-2">
-              {canClose && (
-                <Button variant="secondary" onClick={close}>
-                  Exit
-                </Button>
-              )}
+              <Button variant="secondary" onClick={close}>
+                Exit
+              </Button>
               <Button variant="primary" onClick={startGame}>
                 Start
               </Button>
@@ -523,11 +517,9 @@ export default function SpatiShowdown() {
             </div>
 
             <div className="flex gap-2">
-              {canClose && (
-                <Button variant="secondary" onClick={close}>
-                  Exit
-                </Button>
-              )}
+              <Button variant="secondary" onClick={close}>
+                Exit
+              </Button>
               <Button variant="primary" onClick={startGame}>
                 Play again
               </Button>
