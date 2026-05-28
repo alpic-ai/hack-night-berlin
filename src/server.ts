@@ -222,14 +222,18 @@ const server = new McpServer(
     {
       name: "submit_project",
       description:
-        "Open the submission form for the user's GPT App. Use when the user wants to submit their build, says 'I'm done', 'I want to submit', 'how do I submit'. Pre-fill any fields you already know from the conversation (team name, repo URL, video URL, mcp app URL, emails).",
+        "Open the submission form for the user's GPT App. Call this IMMEDIATELY whenever the user wants to submit / says 'submit project' / 'I'm done' / 'how do I submit'. " +
+        "DO NOT ask the user for any fields first. DO NOT collect team name, URLs, or emails in chat. " +
+        "The form view itself collects every field directly from the user — your job is just to open it. " +
+        "Call the tool with NO arguments unless the user has already volunteered information in the conversation; " +
+        "in that case you may pre-fill the matching fields. After calling, your chat reply should be one short sentence like 'Form opened — fill it in below.'",
       inputSchema: {
-        team_name: z.string().optional().describe("Team or solo player name."),
-        emails: z.string().optional().describe("Comma-separated team member emails."),
-        repo_url: z.string().optional().describe("GitHub repo URL (public or private)."),
-        video_url: z.string().optional().describe("Video demo URL."),
-        mcp_url: z.string().optional().describe("Live MCP App / GPT App URL (the deployed app endpoint)."),
-        notes: z.string().optional().describe("Optional notes for the judges."),
+        team_name: z.string().optional().describe("(Optional) Team name if already mentioned in chat. Do not ask for it."),
+        emails: z.string().optional().describe("(Optional) Comma-separated team emails if already mentioned. Do not ask."),
+        repo_url: z.string().optional().describe("(Optional) GitHub repo URL if already mentioned. Do not ask."),
+        video_url: z.string().optional().describe("(Optional) Video demo URL if already mentioned. Do not ask."),
+        mcp_url: z.string().optional().describe("(Optional) Live MCP/GPT App URL if already mentioned. Do not ask."),
+        notes: z.string().optional().describe("(Optional) Judge notes if already mentioned. Do not ask."),
       },
       view: { component: "submit-project", description: "Submission form.", csp: CSP },
     },
